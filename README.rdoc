@@ -7,4 +7,143 @@
    所有我写的是rails g scaffold item name:string description:text user:belongs_to
    这里的改动还会影响到下面的rake db:seed，这个你只要仔细，应该能够解决这个问题。
 
+这里我将做一点小小的翻译, 不是完完全全按照英文生硬的翻译过来。
+
+The Scenario
+在这个app中，我们将要写一个商店，每个买家一个账户，就像你到京东买东西，需要账户一个道理
+这个商店还要有  卖家， 管理员。
+
+这里 作者创建了 三个controller
+item  商品， user  使用者， role  角色
+
+下面介绍各个角色的 permission
+没注册用户在浏览时，将会跳转到注册页面
+注册过的用户可以浏览商品
+卖家的权限：浏览商品，创建商品，更新商品，以及下架商品
+管理员：后台的任何操作都可以进行
+
+So, let's started
+所以，让我们开始吧。
+
+首先创建rails项目，进入这个项目，并通过脚手架的方式(注意：这个地方，我将price掠去了，如果你英文不好，请一定到本文的开头，看看，我的处理)
+创建出 item user role
+之后，rake db:migrate 创建相关的数据表
+
+This will create a bunch of boilerplate code.
+We'll need to edit the view templates as shown below:
+这个说的是，接下来，我们将对view(视图)做一些修改
+
+Remove ...
+删除掉一些东西
+。。。
+
+有用的东西来了
+devise的使用
+
+首先  在你的Gemfile中添加代码  gem 'devise'
+接着  另开terminal,目录为 store2(因为我这里是store2),输入（换个说话：执行） rails g devise:install, 接着，敲回车键
+          This command generates a couple of files...
+          这句话说的是，这行命令生成了文件，
+接着，按照terminal 中出现的提示，按步骤来操作
+      Add the following line to ...
+      将下面的这段代码添加到config/environments/development.rb中并保存
+      And set a root...
+      并且，到/config/routes.rb文件中设置根路由
+
+接着，我们将会用到User这个model,所以我们创建它,这里我们通过devise的方式创建  rails g devise User, 接着 rake db:migrate,因为rails g devise User将会生成一个migration
+如果你的项目中已经存在了User  model，别担心，那么，rails g devise User,只会在原来的基础上添加上相应的字段
+
+Edit the /app/views/layouts/....
+接着，我们到视图层去添加上相应的视图层的代码
+
+And add The following line.....
+接着，在ItemsController ,RolesController, UsersController
+中添加上 before_filter :authenticate_user!
+
+--------------
+不知道你看晕了没有，反正我第一次看，就晕倒了，这里我做一次小结，
+1 添加gem  'devise'
+2 安装gem
+3 使用这个gem需要用到 User model ，所以，我们创建这个User model
+4 使用它，怎么使用，到每个controller中添加上一段代码before_filter :authenticate_user! (注意：我想问，这里的 user 是定死的嘛？ 我们是否可以写成 authenticate_xxx!这种形式呢？你有时间的话，可以思考，并实践一下)
+--------------
+
+接下里，我们给roles添加数据了
+
+累了，
+待续。。。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
