@@ -1,28 +1,10 @@
-== README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1. 这个rails app 是练习使用 devise   and    cancancan
+2. 这个demo的搭建主要感谢我搜到的网站的教程，感谢那位程序员下面我将贴上它的链接地址
+   http://hibbard.eu/authentication-with-devise-and-cancancan-in-rails-4-2/
+3. 我这个和原文还是有些许的出入，
+   原文：rails g scaffold item name:string description:text 'price:decimal{5,2}', user:belongs_to
+   我在创建的时候，去掉了'price:decimal{5,2}'
+   所有我写的是rails g scaffold item name:string description:text user:belongs_to
+   这里的改动还会影响到下面的rake db:seed，这个你只要仔细，应该能够解决这个问题。
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
